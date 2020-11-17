@@ -38,15 +38,15 @@ input[type="file"] {
   overflow: auto;
 }
 .div-crop{
-    display: flex;
-    justify-self: center;
-    align-items: center;
-    flex-direction: column;
-    box-shadow: 0px 5px 15px 0px lightgrey;
-    border-radius: 8px;
-    width: 90%;
-    margin: 20px;
-    padding:1%;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0px 5px 15px 0px lightgrey;
+  border-radius: 8px;
+  width: 90%;
+  margin: 20px;
+  padding:1%;
 }
 .left {
   width: 10%;
@@ -67,6 +67,7 @@ input[type="file"] {
   height: 100vh;
   background-color: rgb(248, 242, 243);
   padding: 1%;
+  overflow: auto;
 }
 .content {
   width: 45%;
