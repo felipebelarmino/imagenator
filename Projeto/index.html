@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Imagenator</title>
+    <link rel="stylesheet" href="/public/files/style.css">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+    <main class="container">
+        <div class="container-content">
+            <div class="content"><img src="/public/images/1.jpg" alt=""><label>Imagem 1</label></div>
+            <div class="content"><img src="/public/images/2.jpg" alt=""><label>Imagem 2</label></div>
+            <div class="content"><img src="/public/images/3.jpg" alt=""><label>Imagem 3</label></div>
+        </div>
+        <div class="container-content-center"> 
+            <input type="file" id="photo" />
+            <button onclick="uploadImage()">Upload Image</button>
+            <!-- Stream video via webcam -->
+
+            <video id="video" width=400 height=400 playsinline controls autoplay></video>
+
+             <!-- Trigger canvas web API -->
+            <button id="snap">Capture</button>
+
+            <!-- Webcam video snapshot -->
+            <canvas id="canvas" width="640" height="480"></canvas>
+                <!-- <button id="btnSeletorDeFotos">
+                <input type="file" id="arquivoDaFoto">
+                  Enviar imagem
+                </button>            
+                <img id="recebeFoto" src="" alt="" draggable="false">            
+                <button id="btnCorteFoto" >Cortar seleção</button>
+                <button id="btnBaixar" >Download</button> -->
+            <!-- <div id="seletorFerramenta"></div> -->
+        </div>
+        <div class="container-content">
+
+            <div class="content"><img id="image"/><label>Imagem 1</label></div>
+            <div class="content"><img src="/public/images/2.jpg" alt=""><label>Imagem 2</label></div>
+            <div class="content"><img src="/public/images/3.jpg" alt=""><label>Imagem 3</label></div>
+        </div>
+    </main>    
+    <script src="/public/files/script.js"></script>
+    <script src="/public/files/app.js"></script>
+</body>
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyAfy0Lz3vjVccE3XSBb4rQpI3-1zM2N0SY",
+    authDomain: "imagenator-ccdab.firebaseapp.com",
+    databaseURL: "https://imagenator-ccdab.firebaseio.com",
+    projectId: "imagenator-ccdab",
+    storageBucket: "imagenator-ccdab.appspot.com",
+    messagingSenderId: "571893378531",
+    appId: "1:571893378531:web:4668c69f6606df79f204d6",
+    measurementId: "G-LLGZY6SCGE"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+    console.log(firebase);
+
+    function uploadImage() {
+      const ref = firebase.storage().ref();
+      const file = document.querySelector("#photo").files[0];
+      const name = +new Date() + "-" + file.name;
+      const metadata = {
+        contentType: file.type
+      };
+      const task = ref.child(name).put(file, metadata);
+      task
+        .then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          console.log(url);
+          document.querySelector("#image").src = url;
+        })
+        .catch(console.error);
+    }
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const snap = document.getElementById("snap");
+const errorMsgElement = document.querySelector('span#errorMsg');
+
+const constraints = {
+  audio: false,
+  video: {
+    width: 400, height: 400
+  }
+};
+
+// Access webcam
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
+}
+
+// Success
+function handleSuccess(stream) {
+  window.stream = stream;
+  video.srcObject = stream;
+}
+
+// Load init
+init();
+
+// Draw image
+var context = canvas.getContext('2d');
+snap.addEventListener("click", function() {
+    context.drawImage(video, 0, 0, 640, 480);
+    var image = new Image();
+image.id = "pic";
+image.src = canvas.toDataURL();
+console.log(image.src)
+var button = document.createElement('button')
+button.textContent = 'Upload Image'
+document.body.appendChild(button)
+
+button.onclick = function() {
+    const ref = firebase.storage().ref();
+    ref.child(new Date() + '-' + 'base64').putString(image.src, 'data_url').then(function(snapshot) {
+    console.log('Uploaded a data_url string!');
+    alert("Image Uploaded")
+});
+}
+});
+</script>
+</html>
