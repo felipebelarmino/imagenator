@@ -24,11 +24,11 @@
         </div>
         <div class="container-content-center"> 
             <div class="container div-background">
-                <input type="file" id="photo" />
+                <input type="file" id="photo"/>
                 <button class="button" onclick="uploadImage()">Upload</button>
             </div>
-            <div class="div-crop padding">
-                <button class="button padding" id="btnSeletorDeFotos"><input type="file" id="arquivoDaFoto">Recortar imagem</button>            
+            <div class="div-crop">
+                <button class="button" id="btnSeletorDeFotos"><input type="file" id="arquivoDaFoto">Recortar imagem</button>            
                 <img id="recebeFoto"  draggable="false">            
                 <button id="btnCorteFoto" >Cortar seleção</button>
                 <button id="btnBaixar" >Download</button>
@@ -41,14 +41,13 @@
             <div class="content"><img src="/public/images/3.jpg" alt=""><label>Imagem</label></div>
             <div class="content"><img src="/public/images/3.jpg" alt=""><label>Imagem</label></div>            
             <div class="content"><img src="/public/images/3.jpg" alt=""><label>Imagem</label></div>
-            <div class="content"><img src="/public/images/3.jpg" alt=""><label>Imagem</label></div>
-            
+            <div class="content"><img src="/public/images/3.jpg" alt=""><label>Imagem</label></div>            
         </div>
-    </main>    
-    
+    </main>        
 </body>
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-analytics.js"></script>
 <script src="/public/files/script.js"></script>
+<script src="/public/files/app.js"></script>
 </html>

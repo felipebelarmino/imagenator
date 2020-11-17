@@ -5,6 +5,9 @@
   font-family: "Teko", sans-serif;
   letter-spacing: 5px;
 }
+:root {     
+    --color-red: #e83f5b;
+ }
 .container {
   display: flex;
   justify-content: space-between;
@@ -12,7 +15,7 @@
 }
 .div-background {
   background-color: rgb(248, 245, 245);  
-  padding: 10px;
+  padding: 0 20px;
   border-radius: 8px;
   box-shadow: 0px 0px 10px 5px rgb(211, 208, 208);
 }
@@ -39,13 +42,11 @@ input[type="file"] {
     justify-self: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid #ccc;
+    box-shadow: 0px 5px 15px 0px lightgrey;
+    border-radius: 8px;
     width: 90%;
     margin: 20px;
-}
-.padding{
-    padding: 20px;
-    margin-bottom: 30px;
+    padding:1%;
 }
 .left {
   width: 10%;
@@ -83,9 +84,7 @@ img {
   display: none;
 }
 
-.button {
-  transition: 0.2s;
-  margin: 0 10px;
+button { 
   padding: 1% 3%;
   border: 2px solid rgb(218, 209, 209);
   border-radius: 5px;
@@ -96,11 +95,18 @@ img {
   align-items: center;
   outline: none;
   margin: auto;
+  display: flex;  
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(167, 173, 172, 0.315);   
+  margin: 5px;
+  transition: 0.2s;
 }
-.button:hover {
+button:hover {
+    
   border: 2px solid rgba(255, 46, 46, 0.596);
   box-shadow: 0px 3px 15px rgba(248, 26, 26, 0.39);
-  border-radius: 7px;
+  /* border-radius: 7px; */
   cursor: pointer;
   outline: none;
 }
